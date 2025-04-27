@@ -2,39 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DIY Sandal Making Kits</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-color: #f8f8f8;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            font-size: 18px;
-            color: #666;
-        }
-        a.button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 30px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            border-radius: 5px;
-        }
-        a.button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Now</title>
 </head>
 <body>
-    <h1>DIY Sandal Making Kits</h1>
-    <p>Create your own beautiful sandals at home!</p>
-    <a href="https://buy.stripe.com/test_3csbMwbeJglLbhC7ss" class="button">Buy Now</a>
+    <button id="orderNowBtn">Order Now</button>
+
+    <script>
+        document.getElementById("orderNowBtn").addEventListener("click", function() {
+            // Send request to the backend to generate the payment link
+            fetch("https://jesse.floristriest.nl/barefoot-sandals/backend.php", {  
+                method: "POST",
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.payment_link) {
+                    // Redirect the user to the payment link
+                    window.location.href = data.payment_link;
+                } else {
+                    // Handle error
+                    alert("Error: " + (data.error || "An unexpected error occurred"));
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
 </body>
 </html>
