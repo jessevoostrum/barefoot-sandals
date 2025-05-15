@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>barefoot sandals</title>
     <style>
-        #orderNowBtn {
-            margin-bottom: 20px;
+        .order-now {
+            margin-bottom: 20px
         }
-        nav a {
-            display: block;
-            margin-bottom: 10px;
+        .footer-link {
+            margin-bottom: 10px
         }
     </style>
 </head>
@@ -19,34 +18,14 @@
 
     <p>barefoot sandals kit</p>
 
-    <button id="orderNowBtn">Order Now</button>
+    <div class="order-now"><a href="checkout.html"> Order now </a></div>
 
     <nav>
-        <a href="return-policy.html">Return Policy</a>
-        <a href="refund-and-dispute-policy.html">Refund and Dispute Policy</a>
-        <a href="https://mailhide.io/e/GfrOzBL1">Contact</a>
+        <div class="footer-link"><a href="return-policy.html">Return Policy</a></div>
+        <div class="footer-link"><a href="refund-and-dispute-policy.html">Refund and Dispute Policy</a></div>
+        <div class="footer-link"><a href="https://mailhide.io/e/GfrOzBL1">Contact</a></div>
     </nav>
 
-    <script>
-        document.getElementById("orderNowBtn").addEventListener("click", function() {
-            // Send request to the backend to generate the payment link
-            fetch("https://jesse.floristriest.nl/barefoot-sandals/backend.php", {  
-                method: "POST",
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.payment_link) {
-                    // Redirect the user to the payment link
-                    window.location.href = data.payment_link;
-                } else {
-                    // Handle error
-                    alert("Error: " + (data.error || "An unexpected error occurred"));
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
-        });
-    </script>
+    
 </body>
 </html>
