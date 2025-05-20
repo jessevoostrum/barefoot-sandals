@@ -1,0 +1,124 @@
+body{
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+}
+
+.parent0 {
+    margin: 0;
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    /* background-color: yellow; */
+}
+
+.column {
+    margin: 20px;
+    width: 400px;
+    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* left-align the content */
+    /* background: red; */
+}
+
+.main {
+    flex: 1;
+    width: 100%;
+    overflow-y: auto; /* scroll if content is too long */
+    /* background: blue; */
+    color: rgb(85, 58, 34);
+    margin-top: 20px;
+}
+
+.main img {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.images {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.images-sandals {
+    width: 50%;
+}
+
+.images-face {
+    width: 50%;
+}
+
+.image-face-wide {
+    width: 100%;
+}
+
+.about-me {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.about-me__text {
+    flex: 1;
+    margin: 0;
+    text-align: justify;
+}
+
+.about-me__text p {
+    margin-top: 0;
+}
+
+.about-me__image {
+    width: 38%;
+}
+
+.about-me__image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+h1 {
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(85, 58, 34);
+    font-size: 36px;
+}
+
+.footer {
+    margin-top: 50px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+    /* background: lightblue; */
+}
+
+.footer-link {
+    margin-bottom: 2px
+}
+
+.footer-link a {
+    color: #2c5282;  /* A nice blue color */
+    text-decoration: none;
+}
+
+.footer-link a:hover {
+    text-decoration: underline;
+}
+
+.main a {
+    color: #2c5282;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.main a:hover {
+    text-decoration: underline;
+}
