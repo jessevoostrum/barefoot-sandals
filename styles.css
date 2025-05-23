@@ -1,22 +1,88 @@
-body{
-    margin: 0;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 16px;
+:root {
+    --width-column: 400px;
+    --width-image: 70px;
+    --gap-header: 20px;
+    --text-color: rgb(85, 58, 34);
 }
+
+body {
+    margin: 0;
+    font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: var(--text-color);
+}
+
+body a {
+    color: rgb(85, 58, 34);
+}
+
 
 .parent0 {
     margin: 0;
-    /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.header {
+    max-width: calc(var(--width-column) + 2 * (var(--gap-header) + var(--width-image))); 
+    position: sticky;
+    top: 0;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center; /* center horizontally */
-    align-items: center;     /* center vertically */
-    /* background-color: yellow; */
+    align-items: center;
+    gap: var(--gap-header);
+    background-color: #f9f9f9;
+    z-index: 100;
+    margin-left: 10px;
+    transition: padding 0.3s ease;
+}
+
+.header.collapsed {
+    padding: 5px 0;
+}
+
+.header img {
+    width: var(--width-image);
+    transition: width 0.3s ease;
+    order: 1;
+}
+
+.header.collapsed img {
+    width: 40px;
+    margin: 3px;
+}
+
+.header h1 {
+    transition: font-size 0.3s ease;
+    font-size: 36px;
+    color: rgb(85, 58, 34);
+}
+
+.header.collapsed h1 {
+    font-size: 24px;
+}
+
+.header a {
+    text-decoration: none;
+    color: rgb(85, 58, 34) !important;  /* Making color more specific */
+}
+
+.header a:link {
+    color: rgb(85, 58, 34) !important;  /* Explicitly setting unvisited link color */
+}
+
+.header a:click {
+    color:#666;
 }
 
 .column {
-    margin: 20px;
-    width: 400px;
+    margin: 10px;
+    max-width: var(--width-column);
     /* height: 100vh; */
     display: flex;
     flex-direction: column;
@@ -29,8 +95,7 @@ body{
     width: 100%;
     overflow-y: auto; /* scroll if content is too long */
     /* background: blue; */
-    color: rgb(85, 58, 34);
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .main img {
@@ -121,4 +186,20 @@ h1 {
 
 .main a:hover {
     text-decoration: underline;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 5px 0;
+    }
+    
+    .header img {
+        width: 40px;
+        margin: 3px;
+    }
+    
+    .header h1 {
+        font-size: 24px;
+    }
 }

@@ -1,5 +1,11 @@
 // Common components for the website
 const components = {
+    header: `
+        <div class="header">
+            <a href="index.html"><img src="images/logo-foot-color-brown.png" alt="logo"></a>
+            <a href="index.html"><h1>Barefoot Sandals</h1></a>
+        </div>
+    `,
     footer: `
         <div class="footer">
             <nav>
@@ -23,6 +29,11 @@ const components = {
 
 // Function to include components
 function includeComponents() {
+    // Replace header placeholders
+    document.querySelectorAll('[data-component="header"]').forEach(element => {
+        element.innerHTML = components.header;
+    });
+
     // Replace footer placeholders
     document.querySelectorAll('[data-component="footer"]').forEach(element => {
         element.innerHTML = components.footer;
@@ -34,5 +45,26 @@ function includeComponents() {
     });
 }
 
+// Function to handle header collapse on scroll
+function handleHeaderCollapse() {
+    const header = document.querySelector('.header');
+    let lastScroll = 0;
+    
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 50) {
+            header.classList.add('collapsed');
+        } else {
+            header.classList.remove('collapsed');
+        }
+        
+        lastScroll = currentScroll;
+    });
+}
+
 // Run when DOM is loaded
-document.addEventListener('DOMContentLoaded', includeComponents); 
+document.addEventListener('DOMContentLoaded', () => {
+    includeComponents();
+    handleHeaderCollapse();
+}); 
