@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barefoot Sandals - Checkout</title>
+    <div data-component="head"></div>
+    <script src="components.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
         .options-container {
             margin: 20px 0;
             padding: 20px;
@@ -48,7 +47,7 @@
             margin: 20px 0;
         }
         #orderNowBtn {
-            background-color: #4CAF50;
+            background-color: #2c5282;
             color: white;
             padding: 15px 32px;
             text-align: center;
@@ -59,46 +58,63 @@
             cursor: pointer;
             border: none;
             border-radius: 4px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 500;
         }
         #orderNowBtn:hover {
-            background-color: #45a049;
+            background-color: #1a365d;
         }
         #orderNowBtn:disabled {
             background-color: #cccccc;
             cursor: not-allowed;
         }
+        .checkout-content {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
-    <h1>Checkout</h1>
-    <p>Complete your purchase by selecting your options below</p>
-    
-    <div class="options-container">
-        <h3>Select Cord Color</h3>
-        <div class="color-options">
-            <div class="color-option">
-                <div id="black" class="color-preview selected" data-color="black"></div>
-                <span>Black</span>
-            </div>
-            <div class="color-option">
-                <div id="navy" class="color-preview" data-color="navy"></div>
-                <span>Navy</span>
-            </div>
-            <div class="color-option">
-                <div id="red" class="color-preview" data-color="red"></div>
-                <span>Red</span>
-            </div>
-        </div>
+    <div class="parent0">
+        <div class="column">
+            <div class="main">
+                <div class="checkout-content">
+                    <h1>Checkout</h1>
+                    <p>Complete your purchase by selecting your options below</p>
+                    
+                    <div class="options-container">
+                        <h3>Select Cord Color</h3>
+                        <div class="color-options">
+                            <div class="color-option">
+                                <div id="black" class="color-preview selected" data-color="black"></div>
+                                <span>Black</span>
+                            </div>
+                            <div class="color-option">
+                                <div id="navy" class="color-preview" data-color="navy"></div>
+                                <span>Navy</span>
+                            </div>
+                            <div class="color-option">
+                                <div id="red" class="color-preview" data-color="red"></div>
+                                <span>Red</span>
+                            </div>
+                        </div>
 
-        <div id="holePunchOption">
-            <label>
-                <input type="checkbox" id="excludeHolePunch">
-                Exclude Hole Punch Tool (-/- €2)
-            </label>
+                        <div id="holePunchOption">
+                            <label>
+                                <input type="checkbox" id="excludeHolePunch">
+                                Exclude Hole Punch (&ndash; €2)
+                            </label>
+                        </div>
+                    </div>
+
+                    <button id="orderNowBtn">Order Now</button>
+                </div>
+            </div>
+
+            <div data-component="footer"></div>
         </div>
     </div>
-
-    <button id="orderNowBtn">Order Now</button>
 
     <script>
         let selectedColor = 'black';
