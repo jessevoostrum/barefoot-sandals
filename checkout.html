@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barefoot Sandals - Checkout</title>
     <div data-component="head"></div>
     <script src="components.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     <style>
         .options-container {
             margin: 20px 0;
@@ -100,15 +94,33 @@
                             </div>
                         </div>
 
+                        <div id="shoeSizeOption">
+                            <h3>Select Shoe Size*</h3>
+                            <div>
+                                <label>
+                                    <input type="radio" name="shoeSize" value="0-40" checked>
+                                    Size 0 - 40
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    <input type="radio" name="shoeSize" value="41-48">
+                                    Size 41 - 48
+                                </label>
+                            </div>
+                        </div>
+                        <br>
                         <div id="holePunchOption">
                             <label>
                                 <input type="checkbox" id="excludeHolePunch">
-                                Exclude Hole Punch (&ndash; €2)
+                                Exclude Hole Punch (&ndash;&thinsp;€2)
                             </label>
                         </div>
                     </div>
-
+                    <p>(Total price is calculated on the next page.)</p>
                     <button id="orderNowBtn">Order Now</button>
+
+                    <p>*If your shoe size is larger than 48, you can  <a href="https://mailhide.io/e/GfrOzBL1">contact me</a> for a custom order.</p>
                 </div>
             </div>
 
@@ -133,6 +145,7 @@
 
         document.getElementById("orderNowBtn").addEventListener("click", function() {
             const excludeHolePunch = document.getElementById("excludeHolePunch").checked;
+            const shoeSize = document.querySelector('input[name="shoeSize"]:checked').value;
             
             // Send request to the backend to generate the payment link
             fetch("https://jesse.floristriest.nl/barefoot-sandals/backend.php", {  
@@ -142,7 +155,8 @@
                 },
                 body: JSON.stringify({
                     color: selectedColor,
-                    excludeHolePunch: excludeHolePunch
+                    excludeHolePunch: excludeHolePunch,
+                    shoeSize: shoeSize
                 })
             })
             .then(response => response.json())

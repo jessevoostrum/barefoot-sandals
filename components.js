@@ -5,7 +5,7 @@ const components = {
             <nav>
                 <div class="footer-link"><a href="policies.html#delivery">Delivery</a></div>
                 <div class="footer-link"><a href="policies.html#returns">Return Policy</a></div>
-                <div class="footer-link"><a href="policies.html#refunds">Refund Policy</a></div>
+                <div class="footer-link"><a href="policies.html#refunds">Refund and Dispute Policy</a></div>
                 <div class="footer-link"><a href="https://mailhide.io/e/GfrOzBL1">Contact</a></div>
             </nav>
         </div>
