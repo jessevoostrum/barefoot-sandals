@@ -49,13 +49,15 @@ function includeComponents() {
 function handleHeaderCollapse() {
     const header = document.querySelector('.header');
     let lastScroll = 0;
+    const COLLAPSE_THRESHOLD = 50;  // Threshold to collapse the header
+    const EXPAND_THRESHOLD = 20;    // Threshold to expand the header (lower than collapse)
     
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
         
-        if (currentScroll > 50) {
+        if (currentScroll > COLLAPSE_THRESHOLD) {
             header.classList.add('collapsed');
-        } else {
+        } else if (currentScroll < EXPAND_THRESHOLD) {
             header.classList.remove('collapsed');
         }
         
