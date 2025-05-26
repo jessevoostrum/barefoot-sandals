@@ -1,6 +1,7 @@
 :root {
     --width-column: 400px;
-    --width-image: 70px;
+    --width-image: 40px;
+    --width-image-uncollapsed: 70px;
     --gap-header: 20px;
     --text-color: rgb(85, 58, 34);
 }
@@ -13,13 +14,10 @@ body {
     color: var(--text-color);
 }
 
-body a {
-    color: rgb(85, 58, 34);
-}
 
 
 .parent0 {
-    margin: 0;
+    margin: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,50 +36,27 @@ body a {
     gap: var(--gap-header);
     background-color: #f9f9f9;
     z-index: 100;
-    margin-left: 10px;
-    transition: padding 0.3s ease;
-}
-
-.header.collapsed {
-    padding: 5px 0;
+    transition: max-width 0.3s ease;
 }
 
 .header img {
     width: var(--width-image);
     transition: width 0.3s ease;
-    order: 1;
 }
 
-.header.collapsed img {
-    width: 40px;
-    margin: 3px;
-}
 
 .header h1 {
     transition: font-size 0.3s ease;
-    font-size: 36px;
-    color: rgb(85, 58, 34);
-}
-
-.header.collapsed h1 {
     font-size: 24px;
 }
 
 .header a {
     text-decoration: none;
-    color: rgb(85, 58, 34) !important;  /* Making color more specific */
 }
 
-.header a:link {
-    color: rgb(85, 58, 34) !important;  /* Explicitly setting unvisited link color */
-}
-
-.header a:click {
-    color:#666;
-}
 
 .column {
-    margin: 10px;
+    margin: 0px;
     max-width: var(--width-column);
     /* height: 100vh; */
     display: flex;
@@ -89,6 +64,8 @@ body a {
     align-items: flex-start; /* left-align the content */
     /* background: red; */
 }
+
+
 
 .main {
     flex: 1;
@@ -98,9 +75,21 @@ body a {
     margin-top: 0px;
 }
 
+.main h2 {
+    margin-top: 30px;
+}
+
 .main img {
     width: 100%;
     margin: 20px 0;
+}
+
+.buyHere {
+    margin-bottom: 10px;
+}
+
+.image-own-feet {
+    margin-top: 35px;
 }
 
 .images {
@@ -189,17 +178,19 @@ h1 {
 }
 
 /* Mobile styles */
-@media screen and (max-width: 768px) {
-    .header {
-        padding: 5px 0;
+@media screen and (min-width: 769px) {
+
+
+    .header.uncollapsed {
+        max-width: calc(var(--width-column) + 2 * (var(--gap-header) + var(--width-image-uncollapsed)));
     }
-    
-    .header img {
-        width: 40px;
-        margin: 3px;
+
+    .header.uncollapsed img {
+        width: var(--width-image-uncollapsed);
     }
-    
-    .header h1 {
-        font-size: 24px;
+
+    .header.uncollapsed h1 {
+        font-size: 36px;
     }
+
 }

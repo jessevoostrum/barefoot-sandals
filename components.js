@@ -49,16 +49,16 @@ function includeComponents() {
 function handleHeaderCollapse() {
     const header = document.querySelector('.header');
     let lastScroll = 0;
-    const COLLAPSE_THRESHOLD = 50;  // Threshold to collapse the header
+    const COLLAPSE_THRESHOLD = 60;  // Threshold to collapse the header
     const EXPAND_THRESHOLD = 20;    // Threshold to expand the header (lower than collapse)
     
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
+        const currentScroll = window.scrollY;
         
         if (currentScroll > COLLAPSE_THRESHOLD) {
-            header.classList.add('collapsed');
+            header.classList.remove('uncollapsed');
         } else if (currentScroll < EXPAND_THRESHOLD) {
-            header.classList.remove('collapsed');
+            header.classList.add('uncollapsed');
         }
         
         lastScroll = currentScroll;
@@ -68,5 +68,15 @@ function handleHeaderCollapse() {
 // Run when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     includeComponents();
-    handleHeaderCollapse();
+    // Check if current page is index.html (or root)
+    const isIndex = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
+    if (isIndex) {
+        handleHeaderCollapse();
+        // Start expanded on index page if at top
+        const header = document.querySelector('.header');
+        if (window.scrollY < 20) {
+            header.classList.add('uncollapsed');
+        }
+    }
+    // On non-index pages, header stays collapsed by default
 }); 
