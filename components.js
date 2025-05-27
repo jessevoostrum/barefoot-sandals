@@ -1,11 +1,5 @@
 // Common components for the website
 const components = {
-    header: `
-        <div class="header">
-            <a href="index.html"><img src="images/logo-foot-color-brown.png" alt="logo"></a>
-            <a href="index.html"><h1>Barefoot Sandals</h1></a>
-        </div>
-    `,
     footer: `
         <div class="footer">
             <nav>
