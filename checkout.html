@@ -4,7 +4,7 @@
     <title>Barefoot Sandals - Checkout</title>
     <div data-component="head"></div>
     <script src="components.js"></script>
-    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="checkout.css">
 </head>
 <body>
     <div class="parent0">
@@ -21,17 +21,23 @@
                 <div class="checkout-content">
                     <h2>Checkout</h2>
                     
-                    <div class="options-container">
-                        <div id="kitsContainer">
-                            <!-- First kit will be added here by JavaScript -->
-                        </div>
-                        
-                        <button id="addKitBtn">Add Another Kit</button>
+                    
+                    <div id="kitsContainer">
+                        <!-- First kit will be added here by JavaScript -->
                     </div>
                     
-                    <button id="orderNowBtn">Order Now</button>
+                    <button id="addKitBtn">Add Another Kit</button>
+                    
+                    <div class="price-order-container">
+                        <div class="price-shipping-container">
+                            <div id="totalPrice"></div>
+                            <small style="font-size: 0.8em;">(includes €4.75 shipping)</small>
+                        </div>
+                        <button id="orderNowBtn">Order Now</button>
+                    </div>
 
                     <p>*If your shoe size is larger than 48, you can  <a href="https://mailhide.io/e/GfrOzBL1">contact me</a> for a custom order.</p>
+                    <p>**only exclude this when you have a tool for making 3mm holes at home.</p>
                 </div>
             </div>
 
@@ -41,6 +47,31 @@
 
     <script>
         let selectedColors = ['black']; // Array to store selected colors for each kit
+        const BASE_PRICE = 14; // Price per kit without hole punch
+        const HOLE_PUNCH_PRICE = 2; // Price for hole punch tool
+        const SHIPPING_COST = 4.75; // Shipping cost per order
+
+        function calculateTotalPrice() {
+            const kits = document.querySelectorAll('.kit-container');
+            let total = 0;
+
+            kits.forEach((kit, index) => {
+                const excludeHolePunch = kit.querySelector(`#excludeHolePunch-${index}`)?.checked;
+                const kitPrice = BASE_PRICE + (excludeHolePunch ? 0 : HOLE_PUNCH_PRICE);
+                total += kitPrice;
+            });
+
+            // Add shipping cost only once if there are any kits
+            if (kits.length > 0) {
+                total += SHIPPING_COST;
+            }
+
+            // Update price display
+            const totalPriceElement = document.getElementById('totalPrice');
+            totalPriceElement.innerHTML = `
+                <strong>Total: €${total.toFixed(2)}</strong> 
+            `;
+        }
 
         function createKitElement(kitIndex) {
             const kitContainer = document.createElement('div');
@@ -80,14 +111,12 @@
                         <span>Red</span>
                     </div>
                 </div>
-                ${kitIndex === 0 ? `
                 <div id="holePunchOption">
                     <label>
-                        <input type="checkbox" id="excludeHolePunch-${kitIndex}">
-                        Exclude Hole Punch Tool (&ndash;&thinsp;€2)
+                        <input type="checkbox" id="excludeHolePunch-${kitIndex}" onchange="calculateTotalPrice()" ${kitIndex > 0 ? 'checked' : ''}>
+                        Exclude Hole Punch Tool** (&ndash;&thinsp;€2)
                     </label>
                 </div>
-                ` : ''}
             `;
             return kitContainer;
         }
@@ -108,11 +137,18 @@
             kitContainer.remove();
             selectedColors.splice(kitIndex, 1);
             updateKitNumbers();
+            calculateTotalPrice();
+            
+            // Show the add button again if we're below the maximum
+            const addKitBtn = document.getElementById('addKitBtn');
+            if (document.querySelectorAll('.kit-container').length < 4) {
+                addKitBtn.style.display = 'block';
+            }
         }
 
         function updateKitNumbers() {
             document.querySelectorAll('.kit-container').forEach((container, index) => {
-                container.querySelector('h3').textContent = `Kit ${index + 1}`;
+                <!-- container.querySelector('h3').textContent = `Kit ${index + 1}`; -->
                 if (index > 0) {
                     container.querySelector('.remove-kit').style.display = 'block';
                 }
@@ -121,12 +157,23 @@
 
         // Initialize first kit
         document.getElementById('kitsContainer').appendChild(createKitElement(0));
+        calculateTotalPrice(); // Calculate initial price
 
         // Add kit button handler
         document.getElementById('addKitBtn').addEventListener('click', function() {
-            const newKitIndex = document.querySelectorAll('.kit-container').length;
+            const currentKits = document.querySelectorAll('.kit-container').length;
+            if (currentKits >= 4) {
+                return; // Don't add more kits if we're at the limit
+            }
+            const newKitIndex = currentKits;
             selectedColors.push('black'); // Default color for new kit
             document.getElementById('kitsContainer').appendChild(createKitElement(newKitIndex));
+            calculateTotalPrice(); // Recalculate price after adding new kit
+            
+            // Hide the add button if we've reached the maximum
+            if (currentKits + 1 >= 4) {
+                this.style.display = 'none';
+            }
         });
 
         document.getElementById("orderNowBtn").addEventListener("click", function() {
